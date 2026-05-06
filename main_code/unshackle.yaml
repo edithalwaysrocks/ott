@@ -1,0 +1,160 @@
+tag: 'Yuxtor'
+tmdb_api_key: "cc4e028567dd1bd804d650b891b86f6e"
+simkl_client_id: ""
+tag_group_name: false
+tag_imdb_tmdb: false
+set_terminal_bg: false
+update_checks: false
+update_check_interval: 24
+series_year: false
+
+output_template:
+  movies: '{title}.{year}.{repack?}.{edition?}.{quality}.{source}.WEB-DL.{atmos?}.{hdr?}.{hfr?}.{video}-{tag}'
+  series: '{title}.{season_episode}.{repack?}.{edition?}.{quality}.{source}.WEB-DL.{atmos?}.{hdr?}.{hfr?}.{video}-{tag}'
+  songs: '{track_number}.{title}.{repack?}.{edition?}.{source?}.WEB-DL.{audio_full}.{atmos?}-{tag}'
+
+dl:
+  downloads: 4
+  workers: 16
+
+downloader:
+  NF: n_m3u8dl_re
+  AMZN: aria2c
+  DSNP: n_m3u8dl_re
+  MAX: n_m3u8dl_re
+  UNEXT: n_m3u8dl_re
+  ATVP: aria2c
+  GLBO: aria2c
+  HS: n_m3u8dl_re
+  default: aria2c
+
+decryption:
+  default: mp4decrypt
+  NF: shaka_packager
+
+cdm:
+  default: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  CR: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  PLUTO: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  DSNP: DRMLAB_SL3K
+  UNEXT: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  GLBO: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  MUBI: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  KCW: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  VIKI: xiaomi_mi_a1_15.0.0_60ceee88_8159_l3
+  NF: Decrypt Labs
+  AMZN: DRMLAB_SL3K  
+  HMAX: DRMLAB_SL3K
+
+credentials:
+  CR: 'royberttoilet33@gmail.com:Royman223344'
+
+aria2c:
+  max_concurrent_downloads: 4
+  max_connection_per_server: 3
+  file_allocation: falloc
+  split: 5
+
+n_m3u8dl_re:
+  thread_count: 16
+  ad_keyword: "advertisement"
+  use_proxy: true
+
+curl_impersonate:
+  browser: chrome120
+
+remote_cdm:
+    - name: "Decrypt Labs"
+      type: "decrypt_labs"
+      device_name: "ChromeCDM"
+      device_type: CHROME
+      system_id: 36586
+      security_level: 3
+      host: "https://keyxtractor.decryptlabs.com"
+      secret: "decrypt_labs_special_ultimate"
+
+    - name: "DRMLABL3"
+      "Device Type": ANDROID
+      "Device Name": "l3"
+      "System ID": 8159
+      "Security Level": 3
+      "Host": "http://api2.drmlab.io"
+      "Secret": "drmlab"
+
+    - name: "DRMLAB_SL3K"
+      "Device Type": PLAYREADY
+      "Device Name": "sl3k"
+      "System ID": 0
+      "Security Level": 3000
+      "Host": "http://api2.drmlab.io/playready"
+      "Secret": "drmlab"
+
+    - name: "DRMLAB_SL2K"
+      "Device Type": PLAYREADY
+      "Device Name": "sl2k"
+      "System ID": 0
+      "Security Level": 2000
+      "Host": "http://api2.drmlab.io/playready"
+      "Secret": "drmlab"
+
+key_vaults:
+  - type: SQLite
+    name: Local
+    path: key_store.db
+
+  - type: HTTP
+    name: DRMLab
+    host: http://api.drmlab.io/vault/
+    password: Qm9XvT4pZ8kLs2HdRw6YnBc7Ju3EfGa1
+    api_mode: json
+    no_push: false
+
+  - type: 'HTTP'
+    name: 'Friends Vault'
+    host: 'http://vault.charrons.net:6868/vault'
+    username: 'riyadh'
+    password: 'Fiazuwsf5yZXnr'
+
+directories:
+  cache: ./unshackle/Cache/
+  cookies: ./unshackle/cookies/
+  dcsl: DCSL
+  downloads: Downloads
+  logs: ./unshackle/Logs/
+  temp: Temp
+  wvds: ./unshackle/WVDs/
+  prds: ./unshackle/PRDs/
+  services: ./unshackle/services/
+
+chapter_fallback_name: "Chapter {j:02}"
+
+headers:
+  Accept-Language: "en-US,en;q=0.8"
+  User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
+
+title_cache_enabled: true
+title_cache_time: 1800
+title_cache_max_retention: 86400
+
+debug:
+  enabled: false
+  log_keys: false
+
+muxing:
+  set_title: true
+
+filenames:
+  debug_log: "unshackle_debug_{service}_{time}.jsonl"
+  config: "config.yaml"
+  root_config: "unshackle.yaml"
+  chapters: "Chapters_{title}_{random}.txt"
+  subtitle: "Subtitle_{id}_{language}.srt"
+
+subtitle:
+  # Subtitle conversion method (auto, subby, pycaption, subtitleedit, pysubs2)
+  conversion_method: subtitleedit
+  sdh_method: subtitleedit
+  strip_sdh: false
+  convert_before_strip: false
+  preserve_formatting: true
+  original_format: true

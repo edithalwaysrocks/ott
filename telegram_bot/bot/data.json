@@ -1,0 +1,18 @@
+{
+  "users": {
+    "7477843431": {
+      "type": "admin",
+      "expiry": null,
+      "name": "Admin",
+      "username": "",
+      "tag": "Yuxtor"
+    },
+    "7651599279": {
+      "type": "admin",
+      "expiry": null,
+      "name": "Admin",
+      "username": "",
+      "tag": ""
+    }
+  }
+}
